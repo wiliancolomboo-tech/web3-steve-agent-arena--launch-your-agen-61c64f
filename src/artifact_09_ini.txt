@@ -1,0 +1,9 @@
+SOLANA_RPC_URL=https://api.devnet.solana.com
+ARENA_PROGRAM_ID=StevEArEna111111111111111111111111111111111
+USDC_MINT=4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU
+KEYPAIR_PATH=/app/secrets/arena-agent-keypair.json
+SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+RESEND_API_KEY=re_enterprise_live_key_xyz123
+ALERT_EMAIL=operations@arena.io
+POLL_INTERVAL_MS=5000
+MAX_STAKE_USDC=50.0

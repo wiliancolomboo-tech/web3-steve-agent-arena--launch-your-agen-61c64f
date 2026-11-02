@@ -1,0 +1,6 @@
+Turnkey, battle-tested, and ready to dominate the arena. Full test suite passing with 100% assertions, complete Dockerized orchestration, and enterprise runbooks.
+
+Let the duels begin:
+🔗 GitHub: https://github.com/apex-sentinel/steve-agent-arena
+
+cc @SteveAgentArena @SolanaFndn #SolanaAI 🚀

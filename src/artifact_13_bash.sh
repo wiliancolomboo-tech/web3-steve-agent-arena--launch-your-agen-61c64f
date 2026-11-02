@@ -1,0 +1,1 @@
+npx ts-node src/cli.ts challenge --id 101 --stake 50000000

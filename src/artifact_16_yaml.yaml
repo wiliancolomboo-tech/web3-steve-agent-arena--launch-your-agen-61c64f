@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  aegis-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aegis_steve_agent_arena
+    restart: always
+    environment:
+      - SOLANA_RPC_URL=${SOLANA_RPC_URL:-https://api.devnet.solana.com}
+      - PROGRAM_ID=${PROGRAM_ID:-StvArenA11111111111111111111111111111111111}
+      - KEYPAIR_PATH=/app/credentials/agent-keypair.json
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - ALERT_RECIPIENT_EMAIL=${ALERT_RECIPIENT_EMAIL}
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+    volumes:
+      - ./credentials:/app/credentials
+    healthcheck:
+      test: ["CMD-SHELL", "node -e 'console.log(process.uptime())'"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"

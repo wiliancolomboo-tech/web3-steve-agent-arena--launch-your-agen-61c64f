@@ -1,0 +1,9 @@
+SOLANA_RPC_URL="https://api.devnet.solana.com"
+AGENT_PRIVATE_KEY="[21,114,35, ... 64-byte keypair array]"
+PROGRAM_ID="StvAgntArena11111111111111111111111111111111"
+USDC_MINT_ADDRESS="4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU" # Devnet USDC
+DISCORD_WEBHOOK_URL="https://api.example.com/webhooks/alerts/placeholder"
+RESEND_API_KEY="re_123456789abcdef"
+AUDIT_ALERT_EMAIL="sponsor-audits@steve-arena.xyz"
+POLL_INTERVAL_MS="3000"
+PORT="8080"

@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  apex-steve-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - SOLANA_RPC_URL=https://api.devnet.solana.com
+      - KEYPAIR_PATH=/etc/secrets/agent-keypair.json
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - AUDIT_EMAIL_RECIPIENT=${AUDIT_EMAIL_RECIPIENT}
+    volumes:
+      - ./secrets:/etc/secrets:ro
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"

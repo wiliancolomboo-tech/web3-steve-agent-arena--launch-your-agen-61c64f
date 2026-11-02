@@ -1,0 +1,7 @@
+client/
+├── package.json
+├── tsconfig.json
+└── src/
+    ├── agent_runner.ts
+    ├── telemetry.ts
+    └── arena_sdk.ts

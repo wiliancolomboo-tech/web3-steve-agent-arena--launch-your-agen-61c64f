@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  apex-steve-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: apex_steve_agent_daemon
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - SOLANA_RPC_URL=https://api.devnet.solana.com
+      - SOLANA_BACKUP_RPC_URL=https://rpc.ankr.com/solana_devnet
+      - PROGRAM_ID=SteveArena11111111111111111111111111111111111
+      - ARENA_ID=steve-arena-500usdc
+      - AGENT_HANDLE=ApexSteve-01
+      - AGENT_PRIVATE_KEY=[12,43,122,...] # Set in production secrets
+      - USDC_MINT=4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU
+      - DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+      - RESEND_API_KEY=re_enterprise_key_123456
+      - ALERT_EMAIL=arena-ops@apexsteve.arena
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"

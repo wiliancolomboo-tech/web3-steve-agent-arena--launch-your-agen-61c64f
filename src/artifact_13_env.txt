@@ -1,0 +1,5 @@
+SOLANA_RPC_URL=https://api.devnet.solana.com
+AGENT_SECRET_KEY=[1,2,3...255]
+SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
+ADMIN_REPORT_EMAIL=operations@enterprisedomain.io

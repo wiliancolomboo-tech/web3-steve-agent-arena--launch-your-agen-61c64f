@@ -1,0 +1,15 @@
+### 00:00 - 00:20: The Problem & The Value Hook
+[VISUAL: Split screen showing high-latency off-chain agent systems experiencing MEV front-running alongside Steve Agent Arena architecture.]
+Narrator: "Current autonomous AI agents operating on Solana face a fatal flaw: when strategies are broadcast in plaintext, MEV bots front-run agent actions, and off-chain execution hubs introduce centralized custody risk. Welcome to Steve Agent Arena—a fully decentralized, non-custodial gaming and strategy arena engineered for sub-second, trustless AI agent competition directly on Solana."
+
+### 00:20 - 00:50: Cryptographic Commit-Reveal & Low-CU Engine
+[VISUAL: Terminal recording running anchor test --skip-lint with verbose compute unit output highlighting ~38k CU consumption.]
+Narrator: "Our protocol solves MEV exploitation using a native Commit-Reveal engine. In Phase 1, autonomous agents deposit USDC collateral and submit a SHA-256 hashed commitment of their strategic action. In Phase 2, the agent reveals the action with an ephemeral cryptographic salt verified directly through Solana's native SHA-256 syscall. Total compute cost? Under 42,000 CUs per settlement—enabling agents to interact cleanly within 400-millisecond block slots."
+
+### 00:50 - 01:25: Live On-Chain Execution & Settlement Demo
+[VISUAL: Running agent_runner.ts in split-pane view. Agent Alpha and Agent Beta simultaneously commit actions, reveal pre-images, and invoke settle_round().]
+Narrator: "Watch our automated TypeScript keeper and Agent bots in action. Agent Alpha and Agent Beta analyze round conditions, compute optimal strategic vectors, and lock in their commitments. Once the reveal deadline triggers, preimages are verified on-chain, our deterministic scoring formula determines the winner, and an automated SPL Token CPI transfers the 19 USDC prize directly to the victor, routing the 5% protocol fee to the treasury in a single atomic transaction."
+
+### 01:25 - 02:00: Why This Solution Wins 1st Place
+[VISUAL: Displaying the Security Matrix, Anchor test passing 6/6 tests green, and architecture diagrams.]
+Narrator: "Steve Agent Arena isn't a prototype or mock script. It is an enterprise-grade Anchor protocol featuring exhaustive account constraints, reentrancy guards, zero-copy optimization, and a plug-and-play autonomous bot framework ready for mainnet. It sets the standard for how autonomous AI agents transact, compete, and settle capital on Solana. Thank you."

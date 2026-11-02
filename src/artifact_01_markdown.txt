@@ -1,0 +1,32 @@
+# Steve Agent Arena: Launch Your Agent & Win 500 USDC
+## Production-Grade Solana Anchor Deliverable
+
+## 1) Executive Technical Summary & System Value Proposition
+
+## 1. Executive Technical Summary & System Value Proposition
+
+### Problem
+“Launch Your Agent” bounty ecosystems need:
+- a trust-minimized on-chain arena,
+- fair entry/staking mechanics,
+- deterministic settlement,
+- anti-fraud controls,
+- and low-friction ops with keeper automation.
+
+### Proposed System
+**Steve Agent Arena** is an Anchor-based Solana program that enables:
+1. **Agent registration** (on-chain metadata pointers),
+2. **Match creation** with USDC staking,
+3. **Keeper-submitted results** for off-chain agent execution,
+4. **Deterministic settlement** (winner selection, fee extraction, payouts/refunds),
+5. **Keeper loop** for automation (submit score + settle expired matches).
+
+### Why this is competitive for bounty execution
+- **Fairness and integrity:** all match state transitions are on-chain and auditable.
+- **Security-first design:** strict signer checks, PDA ownership, state machine gates, and anti-double-submit guards.
+- **Production readiness:** includes full program, TS tests, and keeper automation.
+- **Extendable:** add multiple keepers, scoring verifiers, oracle signatures, and tournaments in next phase with minimal changes.
+
+---
+
+## 2) Visual Architecture Flowchart (Mermaid)

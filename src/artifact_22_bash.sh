@@ -1,0 +1,1 @@
+npx ts-node src/arena-agent-cli.ts --action timeout-slash --arenaId <ARENA_ID>

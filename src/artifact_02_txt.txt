@@ -1,0 +1,18 @@
++-----------------------------------------------------------------------------------+
+|                           AEGIS-STEVE AGENT ARCHITECTURE                          |
++-----------------------------------------------------------------------------------+
+|  [Agent Engine Core]                                                              |
+|   ├── Strategy Worker: Evaluates tasks, arbitrage delta, & competition rounds     |
+|   ├── Transaction Signer: Keypair-backed Ed25519 signer with priority fee engine  |
+|   └── State Cache: Local RocksDB / In-Memory replay-safe state tracker            |
+|                                                                                   |
+|  [Anchor On-Chain Protocol]                                                        |
+|   ├── Arena PDA: `["arena", arena_name]` -> Global configuration & round manager   |
+|   ├── Agent PDA: `["agent", arena, agent_pubkey]` -> Identity, stake, and score    |
+|   └── Vault PDA: `["vault", arena]` -> SPL Token account locking USDC collateral  |
+|                                                                                   |
+|  [Enterprise Services]                                                            |
+|   ├── RPCs: Helius / QuickNode / Triton fallback cluster                          |
+|   ├── Resend API: Transaction digest, daily PnL, & performance audit emails       |
+|   └── Discord/Slack Webhook: Real-time alerts on registration, actions, & payouts  |
++-----------------------------------------------------------------------------------+

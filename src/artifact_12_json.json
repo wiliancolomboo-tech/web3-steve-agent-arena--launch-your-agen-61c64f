@@ -1,0 +1,10 @@
+{
+  "status": "HEALTHY",
+  "agent_identity": "5kY3...Vanguard",
+  "active_arena_matches": 0,
+  "last_slot_evaluated": 298410291,
+  "telemetry_bridges": {
+    "discord": "CONNECTED",
+    "resend": "CONNECTED"
+  }
+}

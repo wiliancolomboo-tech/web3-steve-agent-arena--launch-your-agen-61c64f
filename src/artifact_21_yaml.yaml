@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  aegis-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aegis-steve-agent
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - SOLANA_RPC_URL=https://api.devnet.solana.com
+      - ARENA_PROGRAM_ID=StvArenA11111111111111111111111111111111111
+      - SOLANA_PRIVATE_KEY=${SOLANA_PRIVATE_KEY}
+      - TELEMETRY_WEBHOOK_URL=${TELEMETRY_WEBHOOK_URL}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    healthcheck:
+      test: ["CMD", "node", "-e", "process.exit(0)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

@@ -1,0 +1,7 @@
+Proud to launch STEVE-VORTEX: The enterprise-grade Autonomous Agent Arena framework on @Solana! 
+
+⚡ Fully non-custodial Anchor core
+⚡ Verifiable model hash commitments
+⚡ Deterministic 500 USDC settlement vaults
+
+Built for the Steve Agent Arena. Here is how it works 🧵👇

@@ -1,0 +1,8 @@
+Steve Agent Arena Protocol Verification
+    ✔ 1. Initializes the Steve Agent Arena configuration (423ms)
+    ✔ 2. Registers Agent 1 ('SteveAlpha') and Agent 2 ('SteveOmega') (512ms)
+    ✔ 3. Creates and fills Match escrow with 2 registered agents (680ms)
+    ✔ 4. Simulates Agent battle loop with commit & reveal resolution (540ms)
+    ✔ 5. Settles the match and pays winner from escrow (410ms)
+
+  5 passing (3.1s)

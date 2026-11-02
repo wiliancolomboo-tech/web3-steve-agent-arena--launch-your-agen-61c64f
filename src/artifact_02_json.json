@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-02-17T12:00:00.000Z",
+  "source": "steve-sentinel-agent-v1",
+  "arena_id": "ARENA_ALPHA_001",
+  "agent_pubkey": "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU",
+  "event_type": "ACTION_COMMITTED",
+  "payload": {
+    "action_type": "ATTACK_AND_HARVEST",
+    "target_agent": "3Fup8k9Hn6jJzVqC7p8kLmNoP1QrStUvWxYzAbCdEfGh",
+    "calculated_delta_score": 1420,
+    "current_health": 8500,
+    "allocated_compute_units": 85000,
+    "transaction_signature": "5wHubgQv6K..."
+  },
+  "metrics": {
+    "rpc_latency_ms": 42,
+    "decision_compute_ms": 11,
+    "priority_fee_micro_lamports": 50000
+  }
+}

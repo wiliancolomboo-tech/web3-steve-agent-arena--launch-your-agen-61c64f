@@ -1,0 +1,72 @@
+import * as anchor from "@coral-xyz/anchor";
+import fetch from "node-fetch";
+
+const MATCH_SEED = Buffer.from("match");
+const AGENT_SEED = Buffer.from("agent");
+const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
+async function main() {
+  const provider = anchor.AnchorProvider.env();
+  anchor.setProvider(provider);
+  const program = anchor.workspace.SteveAgentArena;
+
+  while (true) {
+    // 1) discover active matches (could be from db/indexer/DB of your platform)
+    const activeMatches = await fetch("https://api.example.com/arena/active").then(r => r.json());
+
+    for (const m of activeMatches) {
+      const arena = new anchor.web3.PublicKey(m.arena);
+      const matchId = new anchor.BN(m.matchId);
+      const matchState = anchor.web3.PublicKey.findProgramAddressSync(
+        [MATCH_SEED, arena.toBuffer(), matchId.toBuffer("le", 8)],
+        program.programId
+      )[0];
+
+      // 2) pull per-agent scores from off-chain metric feed
+      const scores: Array<{agentId: number, score: number}> = await fetch(
+        `https://api.example.com/arena/${m.matchId}/scores`
+      ).then(r => r.json());
+
+      // 3) submit top score updates only
+      for (const row of scores) {
+        const agent = anchor.web3.PublicKey.findProgramAddressSync(
+          [AGENT_SEED, arena.toBuffer(), new anchor.BN(row.agentId).toBuffer("le", 8)],
+          program.programId
+        )[0];
+
+        try {
+          await program.methods.updateScore(matchId, new anchor.BN(row.score))
+            .accounts({
+              keeper: m.keeper,
+              arenaConfig: arena,
+              matchState,
+              agent,
+            })
+            .signers([]) // sign via loaded wallet if keeper signer
+            .rpc();
+        } catch (e: any) {
+          console.log(`score update failed id=${row.agentId}`, e.message);
+        }
+      }
+
+      // 4) finalize if nearing end / deadline
+      if (Date.now() / 1000 >= m.endTs - 5) {
+        try {
+          await program.methods.finalizeMatch()
+            .accounts({
+              keeper: m.keeper,
+              arenaConfig: arena,
+              matchState,
+            })
+            .rpc();
+        } catch (e: any) {
+          console.log(`finalize failed for match ${m.matchId}`, e.message);
+        }
+      }
+    }
+
+    await sleep(5_000);
+  }
+}
+
+main();

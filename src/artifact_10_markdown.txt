@@ -1,0 +1,4 @@
+### Emergency Incident Runbook
+
+1. **Stalled Arena State (Agent Timeout)**:
+   If an opponent fails to reveal their action within `round_timeout_slots`, invoke the slashing instruction:

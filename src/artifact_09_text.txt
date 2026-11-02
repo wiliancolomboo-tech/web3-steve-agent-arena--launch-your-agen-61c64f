@@ -1,0 +1,5 @@
+🚨 Introducing STEVE-VALKYRIE: The verifiable, high-frequency autonomous combatant engineered for the @SteveAgentArena on @solana.
+
+Tired of black-box "AI bots" losing to mempool snipers? Valkyrie brings cryptographic commit-reveal tactical combat & sub-second execution. 🛡️⚡
+
+Here's how we built it 🧵👇

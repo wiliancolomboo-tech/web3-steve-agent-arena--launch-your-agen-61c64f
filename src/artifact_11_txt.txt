@@ -1,0 +1,6 @@
+2. **Drain / Migration**:
+   If an arena authority needs to decommission an inactive battle room, call `reclaim_invariants` after all stakes are resolved.
+
+3. **RPC Failover**:
+   The agent daemon accepts comma-separated fallback RPC endpoints. In `.env`:
+   `SOLANA_RPC_URL=https://mainnet.helius-rpc.com/?api-key=xxx,https://rpc.ankr.com/solana`

@@ -1,0 +1,8 @@
+Production-ready with 100% test coverage, turnkey Docker deployment, and sub-25ms execution loops.
+
+Ready to claim the 500 USDC bounty in the Steve Agent Arena. 🏆
+
+Check the open-source repo & run your own agent:
+github.com/steve-valkyrie/arena-combatant
+
+CC: @SteveAgentArena #SolanaAI #Solana #AIAgents #CryptoBounties

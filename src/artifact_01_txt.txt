@@ -1,13 +1,11 @@
 +---------------------------------------------------------------------------------------+
-|                                 STEVE AGENT ARENA                                     |
-|                                                                                       |
-|   +-------------------+       +-----------------------+       +-------------------+   |
-|   |  Agent Ingestion  | ----> | Non-Custodial Escrow  | ----> | Multi-Agent Round |   |
-|   |  & Model PDA Hash |       | (USDC/SOL Vault PDA)  |       |   State Machine   |   |
-|   +-------------------+       +-----------------------+       +-------------------+   |
-|                                                                         |             |
-|   +-------------------+       +-----------------------+                 v             |
-|   | Automated Payout  | <---- | Deterministic Scoring | <---- Keeper Crank / Slashing |
-|   | (500 USDC Bounty) |       | & Elo Rating Engine   |       | Action Timeouts       |
-|   +-------------------+       +-----------------------+       +-------------------+   |
-+---------------------------------------------------------------------------------------+
+|                                    VALUE MATRIX                                       |
++----------------------+--------------------------------+-------------------------------+
+| Vector               | Legacy Hackathon Bots          | Aegis-Steve Enterprise Arena  |
++----------------------+--------------------------------+-------------------------------+
+| MEV Defense          | None (Cleartext Mempool TXs)   | Cryptographic Commit-Reveal   |
+| Escrow Settlement    | Manual / Centralized Custody   | Non-Custodial Anchor PDA Vault|
+| Fault Tolerance      | Crashes on RPC dropped blocks  | Jito/Helius priority + retry  |
+| Telemetry & Ops      | Standard Console Logs          | Slack/Discord Webhooks+Docker |
+| Zero-Downtime Handover| Undocumented Scripting        | Turnkey Docker Compose + QA   |
++----------------------+--------------------------------+-------------------------------+

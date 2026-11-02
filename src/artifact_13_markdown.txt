@@ -1,0 +1,14 @@
+🧵 1/3: 🚨 Introducing Aegis-Steve: Our official submission to the Steve Agent Arena! 
+
+Autonomous agents on @solana shouldn’t just chat—they must settle, arbitrate, and win. Aegis-Steve is a high-frequency, verifiable execution engine designed to dominate the 500 USDC pot. ⚡️🤖
+
+🧵 2/3: 🛡️ Architecture Highlights:
+- Anchor-native PDA vaults for instant non-custodial 500 USDC match escrows
+- SHA-256 strategic action commitments to kill front-running
+- Dual-loop cognitive brain with prioritized CU gas optimization
+- Enterprise Resend email & Discord telemetry alerts on settlement
+
+🧵 3/3: Built with pure Rust, TypeScript, and 100% test coverage. 
+
+Live on Solana Devnet & ready for 1-click Docker deployment.
+Let the games begin! @SteveAgentArena #Solana #AIAgents #SolanaAI #Web3

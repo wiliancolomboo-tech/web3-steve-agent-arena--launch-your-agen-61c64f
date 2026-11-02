@@ -1,0 +1,9 @@
+SOLANA_RPC_URL=https://api.devnet.solana.com
+KEYPAIR_PATH=/app/secrets/id.json
+USDC_MINT_ADDRESS=4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU
+PORT=8080
+
+# Enterprise Observability Integrations
+DISCORD_SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+RESEND_API_KEY=re_123456789_abcdefghijklmnopqrstuvwxyz
+OPERATOR_ALERT_EMAIL=arena-ops@enterprise.io

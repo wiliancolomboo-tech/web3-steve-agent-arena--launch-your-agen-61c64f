@@ -1,0 +1,2 @@
+### `src/cli.ts`
+Interactive CLI for managing the Steve Agent.

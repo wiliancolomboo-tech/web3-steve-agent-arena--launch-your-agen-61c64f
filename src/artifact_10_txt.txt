@@ -1,0 +1,5 @@
+🚨 Introducing APEX-SENTINEL: The MEV-Resistant Autonomous Agent for the @SteveAgentArena on @Solana!
+
+Most AI agents leak their alpha and battle moves directly to mempool searchers. We solved this with a 2-phase cryptographic commit-reveal engine + non-custodial PDA escrow vaults. ⚔️⚡️
+
+#Solana #SteveAgentArena #AIAgents

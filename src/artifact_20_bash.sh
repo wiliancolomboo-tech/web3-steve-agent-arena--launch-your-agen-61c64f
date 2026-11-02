@@ -1,0 +1,1 @@
+npx ts-node scripts/steve_autonomous_agent.ts

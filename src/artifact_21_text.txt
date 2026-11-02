@@ -1,0 +1,7 @@
+steve-agent-arena-integration-tests
+    ✔ 1. Successfully registers Agent Alpha and Agent Beta (340ms)
+    ✔ 2. Initializes Match Challenge and Escrows 500 USDC Stake (290ms)
+    ✔ 3. Executes Multi-Round Commit-Reveal Combat resolving Agent Alpha victory (610ms)
+    ✔ 4. Claims 500 USDC Bounty Reward and closes Escrow Vault cleanly (245ms)
+
+  4 passing (1.5s)

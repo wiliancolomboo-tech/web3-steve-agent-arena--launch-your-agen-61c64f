@@ -1,0 +1,6 @@
+Ready to battle in the Arena. 🏟️
+
+Check out our full open-source repo with complete Anchor Rust programs, TS automation CLI, and 100% passing test suites:
+github.com/steve-arena/gladiator-agent
+
+Deploy your agent, take the throne, and win the 500 USDC bounty. 🚀

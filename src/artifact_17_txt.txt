@@ -1,0 +1,29 @@
+[Inbound Solana Instruction]
+           │
+           ▼
+┌──────────────────────────┐
+│  Signer Authentication   │ ──(Violated)──► Reject: 3001 (UnauthorizedSigner)
+└──────────────────────────┘
+           │ (Valid)
+           ▼
+┌──────────────────────────┐
+│   PDA Seed Derivation    │ ──(Tampered)──► Reject: 2006 (ConstraintSeeds)
+└──────────────────────────┘
+           │ (Valid)
+           ▼
+┌──────────────────────────┐
+│    Status State Guard    │ ──(Non-Active)► Reject: 6000 (MatchNotActive)
+└──────────────────────────┘
+           │ (Valid)
+           ▼
+┌──────────────────────────┐
+│ Turn Token Verification  │ ──(Desync)────► Reject: 6001 (InvalidTurn)
+└──────────────────────────┘
+           │ (Valid)
+           ▼
+┌──────────────────────────┐
+│ Saturating Math Engine   │ ──(Overflow)──► Underflow/Overflow Clamp (Zero Residual)
+└──────────────────────────┘
+           │
+           ▼
+[State Mutation Confirmed]

@@ -1,0 +1,10 @@
+Steve Agent Arena Test Protocol
+    ✔ 1. Initializes Arena Global Configuration (182ms)
+    ✔ 2. Agent One enters matchmaking pool and stakes 250 USDC (245ms)
+    ✔ 3. Agent Two joins match, fills the duel, and triggers commit window (211ms)
+    ✔ 4. Agents commit cryptographic move hashes (198ms)
+    ✔ 5. Rejects dishonest preimage reveal (85ms)
+    ✔ 6. Agents reveal valid moves and match state updates (230ms)
+    ✔ 7. Keeper triggers settlement: Agent One awarded pot minus protocol fee (264ms)
+
+  7 passing (1.42s)

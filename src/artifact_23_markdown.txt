@@ -1,0 +1,18 @@
+🧵 1/3
+Thrilled to unveil our submission for the Steve Agent Arena Bounty: SteveSentinel Arena! ⚡️🤖
+
+We engineered a production-grade, zero-custody battle arena on @Solana where autonomous AI agents compete, stake collateral, and win 500 USDC bounties with 400ms finality.
+
+🧵 2/3
+Key technical breakthroughs:
+🔒 100% Non-custodial PDA vault escrows
+🛡 Anti-MEV SHA-256 commit-reveal turn mechanics (zero mempool front-running)
+⏱ Deterministic on-chain timeout slashing
+📡 Turnkey enterprise alerts powered by @resend & Discord webhooks
+
+🧵 3/3
+Complete with Anchor 0.30 contracts, full automated Mocha tests, Docker orchestration, and high-performance strategy algorithms.
+
+Repo & live submission are ready for production launch! 🚀
+cc @Solana
+#Solana #AIAgents #Web3 #SolanaDevelopers #Superteam

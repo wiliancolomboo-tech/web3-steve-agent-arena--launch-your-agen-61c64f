@@ -1,0 +1,303 @@
+import * as anchor from "@coral-xyz/anchor";
+import { Program } from "@coral-xyz/anchor";
+import { SteveAgentArena } from "../target/types/steve_agent_arena";
+import {
+  createMint,
+  createAssociatedTokenAccount,
+  mintTo,
+  getAssociatedTokenAddressSync,
+  TOKEN_PROGRAM_ID,
+  ASSOCIATED_TOKEN_PROGRAM_ID,
+} from "@solana/spl-token";
+import { assert } from "chai";
+import {
+  Keypair,
+  PublicKey,
+  LAMPORTS_PER_SOL,
+  SYSVAR_RENT_PUBKEY,
+  SystemProgram,
+} from "@solana/web3.js";
+import BN from "bn.js";
+
+describe("steve-agent-arena", () => {
+  const provider = anchor.AnchorProvider.env();
+  anchor.setProvider(provider);
+  const program = anchor.workspace.SteveAgentArena as Program<SteveAgentArena>;
+
+  const authority = Keypair.generate();
+  const keeper = Keypair.generate();
+  const alice = Keypair.generate();
+  const bob = Keypair.generate();
+
+  const registrationFee = new BN(1_000_000); // 1.0 USDC at 6 decimals
+  const rewardAmount = new BN(500_000_000);   // 500 USDC at 6 decimals
+  let usdcMint: PublicKey;
+  let rewardVault: PublicKey;
+  let arenaConfig: PublicKey;
+  let vaultAuthority: PublicKey;
+  let matchState: PublicKey;
+  let aliceAta: PublicKey;
+  let bobAta: PublicKey;
+  let aliceAgentAta: PublicKey;
+  let bobAgentAta: PublicKey;
+
+  const CONFIG_SEED = Buffer.from("arena-config");
+  const MATCH_SEED = Buffer.from("match");
+  const VAULT_AUTH_SEED = Buffer.from("vault-auth");
+  const AGENT_SEED = Buffer.from("agent");
+
+  const airdrop = async (kp: Keypair) => {
+    await provider.connection.confirmTransaction(
+      await provider.connection.requestAirdrop(kp.publicKey, 10 * LAMPORTS_PER_SOL),
+      "confirmed"
+    );
+  };
+
+  before(async () => {
+    for (const kp of [authority, keeper, alice, bob]) await airdrop(kp);
+
+    usdcMint = await createMint(
+      provider.connection,
+      authority,
+      authority.publicKey,
+      null,
+      6,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      TOKEN_PROGRAM_ID
+    );
+
+    // deterministic PDAs
+    [arenaConfig] = PublicKey.findProgramAddressSync(
+      [CONFIG_SEED, usdcMint.toBuffer()],
+      program.programId
+    );
+    [vaultAuthority] = PublicKey.findProgramAddressSync(
+      [VAULT_AUTH_SEED, arenaConfig.toBuffer()],
+      program.programId
+    );
+
+    // Create vault ATA with vaultAuthority as owner
+    rewardVault = getAssociatedTokenAddressSync(usdcMint, vaultAuthority, true);
+
+    // Create ATA for all participants + keeper/admin
+    const authorityAta = await createAssociatedTokenAccount(
+      provider.connection,
+      authority,
+      usdcMint,
+      authority.publicKey
+    );
+    const keeperAta = await createAssociatedTokenAccount(
+      provider.connection,
+      authority,
+      usdcMint,
+      keeper.publicKey
+    );
+    aliceAta = await createAssociatedTokenAccount(
+      provider.connection,
+      authority,
+      usdcMint,
+      alice.publicKey
+    );
+    bobAta = await createAssociatedTokenAccount(
+      provider.connection,
+      authority,
+      usdcMint,
+      bob.publicKey
+    );
+    aliceAgentAta = aliceAta;
+    bobAgentAta = bobAta;
+
+    // Fund participants with USDC
+    await mintTo(provider.connection, authority, usdcMint, authorityAta.address, authority, BigInt(10_000_000_000)); // 10k
+    await mintTo(provider.connection, authority, usdcMint, keeperAta, authority, BigInt(10_000_000_000));
+    await mintTo(provider.connection, authority, usdcMint, aliceAta, authority, BigInt(10_000_000_000));
+    await mintTo(provider.connection, authority, usdcMint, bobAta, authority, BigInt(10_000_000_000));
+
+    // Seed vault
+    await mintTo(provider.connection, authority, usdcMint, rewardVault, authority, BigInt(600_000_000)); // extra for rewards
+  });
+
+  it("Init arena", async () => {
+    await program.methods
+      .initializeArena(registrationFee, rewardAmount, 10, keeper.publicKey)
+      .accounts({
+        authority: authority.publicKey,
+        arenaConfig,
+        rewardMint: usdcMint,
+        rewardVault,
+        vaultAuthority,
+        tokenProgram: TOKEN_PROGRAM_ID,
+        systemProgram: SystemProgram.programId,
+      })
+      .signers([authority])
+      .rpc();
+
+    const cfg = await program.account.arenaConfig.fetch(arenaConfig);
+    assert.ok(cfg.authority.equals(authority.publicKey));
+    assert.ok(cfg.maxAgentsPerMatch === 10);
+  });
+
+  it("Open match and launch two agents", async () => {
+    const matchId = new BN(1);
+    [matchState] = PublicKey.findProgramAddressSync(
+      [MATCH_SEED, arenaConfig.toBuffer(), matchId.toBuffer("le", 8)],
+      program.programId
+    );
+
+    await program.methods
+      .openMatch(matchId, new BN(3600), 2)
+      .accounts({
+        authority: authority.publicKey,
+        arenaConfig,
+        matchState,
+        systemProgram: SystemProgram.programId,
+      })
+      .signers([authority])
+      .rpc();
+
+    const [aliceAgent] = PublicKey.findProgramAddressSync(
+      [AGENT_SEED, arenaConfig.toBuffer(), new BN(1).toBuffer("le", 8)],
+      program.programId
+    );
+    const [bobAgent] = PublicKey.findProgramAddressSync(
+      [AGENT_SEED, arenaConfig.toBuffer(), new BN(2).toBuffer("le", 8)],
+      program.programId
+    );
+
+    await program.methods
+      .launchAgent("AliceBot", "meta/alice")
+      .accounts({
+        agentOwner: alice.publicKey,
+        arenaConfig,
+        matchState,
+        agent: aliceAgent,
+        participantTokenAccount: aliceAta,
+        rewardVault,
+        vaultAuthority,
+        tokenProgram: TOKEN_PROGRAM_ID,
+        systemProgram: SystemProgram.programId,
+      })
+      .signers([alice])
+      .rpc();
+
+    await program.methods
+      .launchAgent("BobBot", "meta/bob")
+      .accounts({
+        agentOwner: bob.publicKey,
+        arenaConfig,
+        matchState,
+        agent: bobAgent,
+        participantTokenAccount: bobAta,
+        rewardVault,
+        vaultAuthority,
+        tokenProgram: TOKEN_PROGRAM_ID,
+        systemProgram: SystemProgram.programId,
+      })
+      .signers([bob])
+      .rpc();
+
+    const m = await program.account.matchState.fetch(matchState);
+    assert.equal(m.entrants, 2);
+  });
+
+  it("Keeper updates scores and finalizes winner", async () => {
+    const aliceAgent = PublicKey.findProgramAddressSync(
+      [AGENT_SEED, arenaConfig.toBuffer(), new BN(1).toBuffer("le", 8)],
+      program.programId
+    )[0];
+    const bobAgent = PublicKey.findProgramAddressSync(
+      [AGENT_SEED, arenaConfig.toBuffer(), new BN(2).toBuffer("le", 8)],
+      program.programId
+    )[0];
+
+    await program.methods.updateScore(new BN(1), new BN(10))
+      .accounts({
+        keeper: keeper.publicKey,
+        arenaConfig,
+        matchState,
+        agent: aliceAgent,
+      })
+      .signers([keeper])
+      .rpc();
+
+    await program.methods.updateScore(new BN(1), new BN(20))
+      .accounts({
+        keeper: keeper.publicKey,
+        arenaConfig,
+        matchState,
+        agent: bobAgent,
+      })
+      .signers([keeper])
+      .rpc();
+
+    const m = await program.account.matchState.fetch(matchState);
+    assert.equal(m.winnerAgentId.toString(), "2");
+
+    // In this fast test we force finalize immediately (production: rely on end_ts > now)
+    await program.methods.finalizeMatch()
+      .accounts({
+        keeper: keeper.publicKey,
+        arenaConfig,
+        matchState,
+      })
+      .signers([keeper])
+      .rpc();
+
+    const m2 = await program.account.matchState.fetch(matchState);
+    assert.equal(m2.status, 2);
+  });
+
+  it("Winner claims 500 USDC reward", async () => {
+    const bobAgent = PublicKey.findProgramAddressSync(
+      [AGENT_SEED, arenaConfig.toBuffer(), new BN(2).toBuffer("le", 8)],
+      program.programId
+    )[0];
+    const before = Number((await provider.connection.getTokenAccountBalance(bobAgentAta)).value.uiAmountString);
+
+    await program.methods.claimReward()
+      .accounts({
+        winner: bob.publicKey,
+        arenaConfig,
+        matchState,
+        agent: bobAgent,
+        rewardVault,
+        winnerTokenAccount: bobAgentAta,
+        vaultAuthority,
+        tokenProgram: TOKEN_PROGRAM_ID,
+      })
+      .signers([bob])
+      .rpc();
+
+    const after = Number((await provider.connection.getTokenAccountBalance(bobAgentAta)).value.uiAmountString);
+    assert.isTrue(after > before);
+  });
+
+  it("Reject invalid claimant (Alice cannot claim winner reward)", async () => {
+    const aliceAgent = PublicKey.findProgramAddressSync(
+      [AGENT_SEED, arenaConfig.toBuffer(), new BN(1).toBuffer("le", 8)],
+      program.programId
+    )[0];
+
+    try {
+      await program.methods.claimReward()
+        .accounts({
+          winner: alice.publicKey,
+          arenaConfig,
+          matchState,
+          agent: aliceAgent,
+          rewardVault,
+          winnerTokenAccount: aliceAta,
+          vaultAuthority,
+          tokenProgram: TOKEN_PROGRAM_ID,
+        })
+        .signers([alice])
+        .rpc();
+      assert.fail("Alice should not be winner");
+    } catch (err) {
+      assert.include(String(err), "NotWinner");
+    }
+  });
+});

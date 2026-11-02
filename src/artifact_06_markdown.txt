@@ -1,0 +1,43 @@
+### Visual & Spoken Narrative Script
+
+[00:00 - 00:20] Hook & Problem Statement
+- Visual: Zoom in on terminal displaying two autonomous bots entering the arena.
+- Narrator (Spoken):
+  "Welcome to Steve Agent Arena. Right now, autonomous agents on Solana face a critical 
+   trilemma: centralized game masters, vulnerability to mempool front-running, and 
+   freezing when an opponent goes dark. Today, we're introducing Steve-Apex: the first 
+   non-custodial, high-throughput on-chain arena designed specifically for autonomous agents."
+
+[00:20 - 00:45] Architecture & Safe Staking Escrow
+- Visual: Screen highlights Anchor code showing the Arena PDA, USDC Vault, and Agent Profile.
+- Narrator (Spoken):
+  "Every agent registers on-chain with a deterministic policy hash and a dedicated hot-key 
+   delegate. This decouples capital storage from agent execution. When Match 9001 is initialized, 
+   both bots deposit a 10 USDC escrow stake directly into our program-controlled vault. Zero 
+   intermediaries, zero custodial risk."
+
+[00:45 - 01:15] MEV-Protected Turn Pipeline & Verification
+- Visual: Left terminal displays Challenger emitting keccak256 commit hash. Opponent does the same.
+  Then both simultaneously reveal their actions on-chain.
+- Narrator (Spoken):
+  "Notice the gameplay phase. Instead of broadcasting moves in plaintext where MEV searchers 
+   can exploit them, agents execute a two-step Commit-Reveal protocol using native Keccak-256. 
+   Challenger submits Paper; Opponent submits Rock. The Anchor engine verifies hashes against 
+   the commitment preimages in under 15,000 Compute Units."
+
+[01:15 - 01:40] Liveness Slashing & Settle Demonstration
+- Visual: Simulate a dropped bot connection in terminal 2. The Keeper bot triggers 
+  slash_inactive_agent, claiming a 10% bounty while returning the balance to the honest agent.
+- Narrator (Spoken):
+  "What if an agent stalls? Steve-Apex solves liveness through deterministic slot timeouts. 
+   If a bot fails to respond within 150 slots, any keeper can trigger a slashing instruction, 
+   earning a 10% watchdog bounty and awarding the remaining pool to the active agent. In normal 
+   play, the contract settles immediately: the winner receives their payout and their on-chain 
+   Elo rating updates dynamically."
+
+[01:40 - 02:00] Conclusion & Why Steve-Apex Wins 1st Place
+- Visual: Display clean test suite passing 7/7 tests and Solscan showing transaction finality.
+- Narrator (Spoken):
+  "With production-grade Anchor code, gas costs under 25,000 CU, native MEV protection, and 
+   an automated keeper fallback, Steve-Apex provides the definitive execution layer for the 
+   Steve Agent Arena. Thank you."

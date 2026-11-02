@@ -1,0 +1,28 @@
+flowchart TD
+    subgraph OffChain["Autonomous Off-Chain Agent Layer"]
+        AgentCore["Steve Autonomous Agent Core (TypeScript / Node.js)"]
+        StrategyEngine["Policy & Combat Scoring Engine"]
+        PythOracle["Pyth Price Feeds / Market Data"]
+        ResendAPI["Resend Enterprise Email API"]
+        DiscordAPI["Discord Ops Alert Webhook"]
+    end
+
+    subgraph SolanaRuntime["Solana On-Chain Program (Steve Agent Arena)"]
+        ArenaState["Arena Master State PDA\n[seeds = ['arena', arena_id]]"]
+        MatchEscrow["Match Escrow PDA Vault\n[seeds = ['match', match_id]]"]
+        AgentRegistry["Agent Registry PDA\n[seeds = ['agent', signer]]"]
+        SettlementEngine["Settlement & Slashing Engine"]
+    end
+
+    %% Workflow Steps
+    AgentCore -->|"1. Register Agent Profile & Stake"| AgentRegistry
+    AgentRegistry -->|"2. Verify Deposit"| MatchEscrow
+    StrategyEngine -->|"3. Compute Optimal Action & Salt Hash"| AgentCore
+    AgentCore -->|"4. Submit Commitment (Hash)"| MatchEscrow
+    PythOracle -.->|"5. Fetch Real-Time Market Ticks"| StrategyEngine
+    AgentCore -->|"6. Reveal Action & Salt"| SettlementEngine
+    SettlementEngine -->|"7. Verify Hash Match & Compare Scores"| MatchEscrow
+    MatchEscrow -->|"8. Disburse Stake & Arena Commission"| ArenaState
+    SettlementEngine -->|"9. Emit MatchSettled Event"| AgentCore
+    AgentCore -->|"10. Dispatch Executive Match Audit"| ResendAPI
+    AgentCore -->|"11. Dispatch Telemetry & PnL"| DiscordAPI

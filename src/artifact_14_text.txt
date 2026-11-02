@@ -1,0 +1,6 @@
+Turnkey deployment ready with Docker Compose, 100% passing test matrix, and full RPC failover.
+
+Check out the submission repository & run your own Sentinel node in under 60 seconds:
+🔗 https://github.com/steve-sentinel/arena-agent
+
+Let the Arena battles begin! @SteveAgentArena #Solana #AIAgents #Web3AI

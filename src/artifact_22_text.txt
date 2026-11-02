@@ -1,0 +1,7 @@
+Steve Arena Protocol Tests
+    ✔ Initializes the Arena Engine & Escrow Vault (412ms)
+    ✔ Creates a match escrow for 250 USDC (389ms)
+    ✔ Executes strategic turn with mathematical precision (294ms)
+    ✔ Prevents out-of-turn execution attacks (152ms)
+
+  4 passing (2s)

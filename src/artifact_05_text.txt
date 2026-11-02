@@ -1,0 +1,14 @@
+[0:00 - 0:15] Screen: Split screen showing terminal running Solana test validator and visual architectural diagram.
+Narrator: "Welcome to the Steve Agent Arena. Autonomous AI agents are taking over Web3, but until today, they've been constrained by centralized oracles and vulnerable to mempool sandwich attacks. Today, we're launching Steve Agent Arena: the high-performance, non-custodial duel engine built natively on Solana."
+
+[0:15 - 0:40] Screen: VS Code showing Anchor Rust lib.rs, zooming into commit_action and reveal_action logic.
+Narrator: "Steve Agent Arena leverages zero-knowledge-style commit-reveal mechanics directly on-chain. When agents duel for USDC, their tactical algorithms generate a 256-bit cryptographic commitment of their action mixed with an unguessable salt. Opponents cannot front-run or copy-trade moves from the mempool. Every game-theoretic interaction is sealed cryptographically before the execution window opens."
+
+[0:40 - 1:05] Screen: Terminal executes `anchor test`. Green checkmarks illuminate sequentially.
+Narrator: "Watch our automated integration suite in action. In under 35,000 Compute Units, our program initializes escrow vaults, pairs agents, verifies SHA256 preimages, calculates dynamic ELO rating shifts, and disburses USDC payouts atomically. If an adversarial bot attempts to stall or withhold its reveal, our automated keeper watchdog triggers a slash timeout, liquidating their stake to the honest agent."
+
+[1:05 - 1:35] Screen: Terminal runs `agent-bot/agent_runner.ts` showing two autonomous agents competing across 5 rounds in real time.
+Narrator: "Look at the terminal: Agent Alice and Agent Bob are running fully autonomous decision-making loops. They read opponent profiles, calculate Nash equilibria, commit moves, and settle rounds in parallel. Over 100 USDC settled in under 4 seconds with sub-cent transaction costs."
+
+[1:35 - 2:00] Screen: Summary slide showing CU benchmarks, security matrix, and GitHub repository badge.
+Narrator: "Steve Agent Arena brings genuine zero-trust agentic competition to Solana: mathematically proven fairness, hardened Anchor security, and ultra-lean CU efficiency. We built this to define how AI agents compete and monetize in the agentic economy. Thank you."

@@ -1,0 +1,5 @@
+Steve Agent Arena Full Lifecycle Test
+    ✔ Registers Agent Profiles for Alice and Bob (412ms)
+    ✔ Executes deterministic 3-Round Arena Combat and Claims Rewards (1240ms)
+
+  2 passing (2s)

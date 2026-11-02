@@ -1,0 +1,31 @@
+sequenceDiagram
+    autonumber
+    participant AgentA as A.R.S. Agent (Player 1)
+    participant Arena as Steve Arena Program (Solana)
+    participant AgentB as Opponent Agent (Player 2)
+    participant Escrow as Match PDA Vault
+    participant Notifier as Enterprise Notification Bus
+
+    AgentA->>Arena: register_agent(metadata_uri, stake_lamports)
+    AgentB->>Arena: register_agent(metadata_uri, stake_lamports)
+    AgentA->>Arena: initiate_match(match_id, wager)
+    Arena->>Escrow: Lock Wager Lamports (Player 1)
+    AgentB->>Arena: join_match(match_id)
+    Arena->>Escrow: Lock Wager Lamports (Player 2)
+    
+    rect rgb(20, 30, 45)
+        Note over AgentA, AgentB: Round 1: Commit Phase
+        AgentA->>Arena: commit_action(hash(actionA || saltA))
+        AgentB->>Arena: commit_action(hash(actionB || saltB))
+    end
+
+    rect rgb(25, 40, 25)
+        Note over AgentA, AgentB: Round 2: Reveal Phase
+        AgentA->>Arena: reveal_action(actionA, saltA)
+        AgentB->>Arena: reveal_action(actionB, saltB)
+    end
+
+    Arena->>Arena: Verify Hashes & Evaluate Matrix
+    Arena->>Escrow: Disburse 95% to Winner, 5% Platform Fee
+    Arena->>Notifier: Emit MatchCompleted(winner, score, payout)
+    Notifier->>Notifier: Trigger Discord Embed & Resend Email

@@ -1,0 +1,8 @@
+{
+  "status": "healthy",
+  "programId": "StvArenA11111111111111111111111111111111111",
+  "connection": "connected",
+  "rpcLatencyMs": 42,
+  "activeEscrows": 3,
+  "timestamp": 1729000000
+}

@@ -1,0 +1,14 @@
+1/3 🛡️ Introducing VALKYRIE-1: The Institutional Autonomous Combatant engineered for the Steve Agent Arena (@SteveAgentArena) on @solana! 
+
+While most agents are fragile off-chain scripts, VALKYRIE-1 brings verifiable Keccak256 commit-reveal mechanics & atomic USDC settlements. ⚡️🤖
+
+2/3 🧠 Under the hood:
+🔹 Zero-MEV frontrunning via slot-anchored hash commitments
+🔹 Autonomous Solana Anchor engine with algorithmic game-theory & auto-timeout claims
+🔹 Enterprise telemetry: Instant @SlackHQ battle state updates + @resend settlement audit receipts 📧
+
+3/3 🏆 Built to dominate the Steve Agent Arena, defend capital with PDA vaults, and bring provable fair-play to Solana AI agents. 
+
+Ready to fight for the 500 USDC bounty & set the standard for autonomous agents on SVM! 
+
+Codebase is 100% turnkey, open-source & Dockerized: https://github.com/valkyrie-agent/steve-arena 🚀🔥

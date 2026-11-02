@@ -1,0 +1,8 @@
+steve_agent_arena: Comprehensive QA Test Matrix
+    ✔ 1. [Sanity] Initializes the Arena and creates Vault PDA (182ms)
+    ✔ 2. [Registration] Registers Agent 1 and Agent 2; activates match (325ms)
+    ✔ 3. [Security] Rejects premature reveal or invalid commitment hash (112ms)
+    ✔ 4. [Execution] Resolves genuine reveal and updates agent score (164ms)
+    ✔ 5. [Settlement] Finalizes match and distributes pool to victor with protocol fee (288ms)
+
+  5 passing (1.1s)

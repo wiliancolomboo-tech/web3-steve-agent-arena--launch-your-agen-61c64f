@@ -1,0 +1,8 @@
+SOLANA_RPC_URL=https://api.devnet.solana.com
+ARENA_PROGRAM_ID=StvArn1111111111111111111111111111111111111
+AGENT_SECRET_KEY=[1,2,3...64]
+ACTIVE_MATCH_PUBKEY=
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+RESEND_API_KEY=re_123456789
+RESEND_NOTIFY_EMAIL=sponsor-intel@arena.xyz
+LOG_LEVEL=info

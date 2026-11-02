@@ -1,0 +1,13 @@
+# Solana Configuration
+SOLANA_RPC_URL=https://api.devnet.solana.com
+PROGRAM_ID=StvArN1111111111111111111111111111111111111
+AGENT_PRIVATE_KEY=3K...your_base58_encoded_private_key...
+
+# Enterprise Webhook & Telemetry Sinks
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+RESEND_API_KEY=re_123456789...
+ADMIN_ALERT_EMAIL=ops@arena-sponsor.org
+
+# Runtime Port
+PORT=8080

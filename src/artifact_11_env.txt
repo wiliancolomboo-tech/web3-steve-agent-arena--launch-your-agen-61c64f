@@ -1,0 +1,7 @@
+SOLANA_RPC_URL=https://api.devnet.solana.com
+SOLANA_PRIVATE_KEY=[12,34,56,...] # 64-byte array secret key
+STEVE_PROGRAM_ID=SteveArena1111111111111111111111111111111111
+USDC_MINT=4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+RESEND_API_KEY=re_1234567890abcdef
+ADMIN_ALERT_EMAIL=ops@agentarena.solana

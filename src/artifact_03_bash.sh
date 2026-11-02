@@ -1,0 +1,1 @@
+anchor init steve_arena_engine --template multiple

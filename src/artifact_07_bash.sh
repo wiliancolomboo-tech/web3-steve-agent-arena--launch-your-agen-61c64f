@@ -1,14 +1,17 @@
-# Set Solana CLI config to Devnet
+# 1. Clone repository & install dependencies
+git clone https://github.com/steve-sentinel/steve-agent-arena.git
+cd steve-agent-arena
+npm install
+
+# 2. Build Anchor Program
+anchor build
+
+# 3. Synchronize program ID across source code and Anchor.toml
+anchor keys sync
+
+# 4. Deploy Program to Solana Devnet / Mainnet-Beta
 solana config set --url https://api.devnet.solana.com
-
-# Fund deployer authority with Devnet SOL
-solana airdrop 2
-
-# Deploy program binary to Devnet
 anchor deploy --provider.cluster devnet
 
-# Run automated Python Agent Bot runner against the deployment
-python3 -m venv venv
-source venv/bin/activate
-pip install anchorpy solana solders
-SOLANA_RPC_URL="https://api.devnet.solana.com" python3 bot/agent_runner.py
+# 5. Run deterministic test validation suite
+anchor test

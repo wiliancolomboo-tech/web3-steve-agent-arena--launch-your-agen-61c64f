@@ -1,0 +1,10 @@
+Steve Agent Arena - Full Test Suite
+    ✔ 1. Initializes Arena Config (182ms)
+    ✔ 2. Registers Agent Profiles (344ms)
+    ✔ 3. Creates Match and Locks 500 USDC Escrow (412ms)
+    ✔ 4. Opponent Joins Match and Matches 500 USDC Escrow (398ms)
+    ✔ 5. Executes Commit-Reveal Cycle with Rock-Paper-Scissors Duel Logic (680ms)
+    ✔ 6. Settles Duel: Agent 2 Claims 1,000 USDC Pot & Updates Elo (310ms)
+    ✔ 7. Exploit Test: Fails when submitting illegitimate reveal hash (215ms)
+
+  7 passing (3.8s)

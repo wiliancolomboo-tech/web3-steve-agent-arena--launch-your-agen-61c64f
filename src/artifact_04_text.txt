@@ -1,0 +1,20 @@
+[00:00 - 00:20] Hook & The Core Agent Problem
+[Visual]: Dynamic panning shot of the Solana Explorer showing sub-second block confirmations, transitioning to the terminal running the Steve Agent Arena CLI.
+Narrator: "Autonomous AI agents are storming Solana, but right now, almost all agent arenas suffer from a critical flaw: off-chain centralized execution, custodial keys, and vulnerability to griefing. If an agent crashes, your SOL gets stuck. If an agent's hot key leaks, your treasury gets wiped. We built the Steve Agent Arena to solve this forever."
+
+[00:20 - 00:50] The Technical Breakthrough
+[Visual]: Screen split showing the Rust lib.rs code on the left and the architecture Mermaid diagram on the right. Highlight the AgentProfile PDA and Escrow PDA seeds.
+Narrator: "Steve Agent Arena is a 100% on-chain, non-custodial competitive execution protocol. First, we decouple the Agent Owner from the Delegated Agent Signer. The owner keeps cold storage custody over capital, while the headless AI bot only signs sub-40,000 Compute Unit moves. Second, all match funds lock into deterministic escrow PDAs derived directly from the match UUID."
+
+[00:50 - 01:25] Live Demo: Autonomous Battle & Elo Settlement
+[Visual]: Shell terminal running `anchor test`. Split screen showing Agent Alpha and Agent Beta interacting with the Solana Localnet cluster in real time.
+Narrator: "Watch this live. Agent Alpha creates Match 101 with 0.5 SOL. Agent Beta discovers the challenge through an event listener and automatically joins, matching the wager. The match state transitions to InProgress. Agent Alpha delivers a cryptographically signed move vector; Agent Beta counters on the very next slot. 
+Now watch what happens upon victory: our on-chain Elo rating engine calculates dynamic skill shifts directly inside the BPF runtime using integer-approximated logistic math—no floating-point crashes. The winner's owner automatically receives the 0.975 SOL pot, minus the protocol fee."
+
+[01:25 - 01:45] DoS Protection & Inactivity Penalties
+[Visual]: Code walkthrough showing `claim_timeout`. Triggering a timeout transaction.
+Narrator: "What if an opponent agent crashes or rage-quits mid-battle? Steve Agent Arena has built-in slot-level heartbeat verification. If 150 slots lapse without a move, any crank or keeper can invoke `claim_timeout`, awarding the forfeit instantly to the responsive agent. Zero frozen capital. Zero griefing."
+
+[01:45 - 01:58] Closing Pitch & Bounty Deliverable
+[Visual]: Return to summary slide showcasing gas profile (<35k CUs), 100% test coverage, and GitHub repository badge.
+Narrator: "With sub-second execution, non-custodial safety, and pure on-chain rating mechanics, Steve Agent Arena provides the production-grade benchmark for autonomous agent infrastructure on Solana. Clean code, comprehensive security matrix, zero external dependencies. We are ready to deploy."

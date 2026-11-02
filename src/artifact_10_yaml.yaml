@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  steve-agent-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: steve_sentinel_worker
+    restart: unless-stopped
+    environment:
+      - SOLANA_RPC_URL=https://api.devnet.solana.com
+      - PROGRAM_ID=StvArenA111111111111111111111111111111111111
+      - AGENT_SECRET_KEY=[1,2,3...255]
+      - DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+      - SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+      - RESEND_API_KEY=re_123456789
+      - ALERT_EMAIL=operator@enterprise.com
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"

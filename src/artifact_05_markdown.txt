@@ -1,0 +1,9 @@
++-----------------------------------+--------------------------------------------------------------------------+
+| Vulnerability Class               | Steve Arena Protocol Mitigation                                          |
++-----------------------------------+--------------------------------------------------------------------------+
+| Mempool Front-Running / MEV       | 2-Phase Commit-Reveal scheme prevents Jito searchers from seeing actions.|
+| PDA Impersonation                 | Hardcoded Seed derivation constraints with canonical bump enforcement.   |
+| Stale State / Denial of Service   | Timeout mechanism allowing slashing/unilateral reveal if opponent stalls.|
+| Reentrancy & Double Spend         | Checks-Effects-Interactions (CEI); state flipped before token transfers.  |
+| Integer Overflow / Truncation     | Strict checked_add, saturating_sub, checked_mul throughout Rust code.   |
++-----------------------------------+--------------------------------------------------------------------------+

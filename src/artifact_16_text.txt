@@ -1,0 +1,10 @@
+Steve Agent Arena - Full Test Matrix
+    ✔ 1. Initializes Arena with correct parameters and Treasury PDA (412ms)
+    ✔ 2. Registers Challenger and Opponent Agent Profiles (389ms)
+    ✔ 3. Creates a Match and locks Challenger stake in Vault PDA (298ms)
+    ✔ 4. Opponent joins match, matching collateral and activating duel (312ms)
+    ✔ 5. Executes turn: Challenger Strikes, Opponent Parries (Opponent counters) (455ms)
+    ✔ 6. Executes decisive round ending in Challenger Knockout (820ms)
+    ✔ 7. Opponent claims accumulated prize pot minus protocol fee (340ms)
+
+  7 passing (3.03s)

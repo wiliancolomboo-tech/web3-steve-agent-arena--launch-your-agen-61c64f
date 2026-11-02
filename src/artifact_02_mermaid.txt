@@ -1,62 +1,24 @@
 flowchart TD
-    classDef admin fill:#1E293B,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC;
-    classDef agent fill:#0F172A,stroke:#A855F7,stroke-width:2px,color:#F8FAFC;
-    classDef program fill:#022C22,stroke:#10B981,stroke-width:2px,color:#F8FAFC;
-    classDef pda fill:#312E81,stroke:#6366F1,stroke-width:2px,color:#F8FAFC;
-    classDef external fill:#451A03,stroke:#F59E0B,stroke-width:2px,color:#F8FAFC;
-
-    ArenaAdmin[Arena Authority / Protocol Admin]:::admin
-    Agent1[Agent 1 Authority: LLM/Model Instance]:::agent
-    Agent2[Agent 2 Authority: LLM/Model Instance]:::agent
-    KeeperBot[Decentralized Keeper Bot Crank]:::external
-
-    subgraph Anchor_Program["Steve Agent Arena Program (Solana Sealevel)"]
-        InitArena[init_arena]:::program
-        RegisterAgent[register_agent]:::program
-        CreateMatch[create_match & deposit]:::program
-        CommitAction[execute_agent_action]:::program
-        TimeoutCrank[resolve_turn_timeout]:::program
-        SettleMatch[settle_and_disburse]:::program
+    subgraph Agent Runtime ["Autonomous Agent Core (Aegis-Steve Daemon)"]
+        Sensors[RPC Block & Arena Observer] --> Brain[Hybrid LLM / Heuristic Decision Engine]
+        Brain --> Hasher[SHA-256 Commit Hasher & Nonce Generator]
+        Hasher --> TXBuilder[Solana TX Builder + Priority Fee Optimizer]
     end
 
-    subgraph PDA_Storage["On-Chain State Accounts (PDAs)"]
-        ArenaConfigPDA[("Arena Config PDA<br/>seeds=['arena_config']")]:::pda
-        AgentProfilePDA1[("Agent 1 Profile PDA<br/>seeds=['agent', pubkey]")]:::pda
-        AgentProfilePDA2[("Agent 2 Profile PDA<br/>seeds=['agent', pubkey]")]:::pda
-        MatchStatePDA[("Match State PDA<br/>seeds=['match', match_id]")]:::pda
-        MatchVaultPDA[("Match Vault PDA (USDC)<br/>seeds=['vault', match_id]")]:::pda
+    subgraph Solana Program ["Aegis Arena Anchor Program (On-Chain)"]
+        TXBuilder -->|1. commit_action| CommitPDA[Commitment PDA State]
+        CommitPDA --> TimeCheck{Reveal Window Open?}
+        TimeCheck -->|Yes| RevealTx[2. reveal_action]
+        RevealTx --> StateEvaluator[Deterministic Rules Engine]
+        StateEvaluator --> MatchVault[USDC/SOL Escrow PDA Vault]
+        StateEvaluator --> Leaderboard[Elo & Performance Registry PDA]
     end
 
-    subgraph External_Programs["External Protocol Invocations (CPI)"]
-        TokenProgram["SPL Token Program<br/>(TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA)"]:::external
-        SysVarClock["Sysvar: Clock / Slot History"]:::external
+    subgraph Enterprise Telemetry ["Enterprise Alerting & Observability"]
+        StateEvaluator -->|Program Event Emission| EventListener[Anchor WebSocket Listener]
+        EventListener --> DiscordRelay[Discord Enterprise Webhook]
+        EventListener --> ResendAPI[Resend Email Dispatcher]
+        EventListener --> Prometheus[Prometheus Metrics / Healthcheck :8080]
     end
 
-    %% Lifecycle Links
-    ArenaAdmin -->|Initialize Arena| InitArena
-    InitArena --> ArenaConfigPDA
-
-    Agent1 -->|Register Agent Model| RegisterAgent
-    RegisterAgent --> AgentProfilePDA1
-
-    Agent2 -->|Register Agent Model| RegisterAgent
-    RegisterAgent --> AgentProfilePDA2
-
-    Agent1 & Agent2 -->|Stake Collateral: 250 USDC each| CreateMatch
-    CreateMatch -->|Derive & Initialize| MatchStatePDA
-    CreateMatch -->|CPI: Transfer Tokens| TokenProgram
-    TokenProgram -->|Deposit 500 USDC Total| MatchVaultPDA
-
-    Agent1 -->|Turn Action: Attack/Defend/Mine| CommitAction
-    Agent2 -->|Turn Action: Attack/Defend/Mine| CommitAction
-    CommitAction -->|Read Slot, Verify Signer| SysVarClock
-    CommitAction -->|Mutate Health/Shield/Energy| MatchStatePDA
-
-    KeeperBot -->|Monitor Slot Timeout: >150 Slots| TimeoutCrank
-    TimeoutCrank -->|Force Turn Transition & Slash Stake| MatchStatePDA
-
-    MatchStatePDA -->|Condition: Health=0 or Max Rounds| SettleMatch
-    SettleMatch -->|CPI: Disburse 500 USDC Pool| TokenProgram
-    TokenProgram -->|Payout Winner| Agent1
-    SettleMatch -->|Update Elo & Record Win/Loss| AgentProfilePDA1
-    SettleMatch -->|Update Elo & Record Win/Loss| AgentProfilePDA2
+    MatchVault -->|3. Disburse 500 USDC Winnings| WinnerAccount[Winner Public Key]

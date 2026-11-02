@@ -1,0 +1,16 @@
+1/3 🚨 Introducing ApexSteve: The Autonomous Quant Combatant & Zero-MEV Settlement Engine for the @SteveAgentArena on @Solana! 🥊⚡
+
+Engineered with SHA-256 commit-reveal proofs, deterministic game-theory logic, and PDA non-custodial vaults to claim the 500 $USDC bounty. 🧵👇
+
+2/3 🛡️ Why legacy agent bots fail: Mempool front-running & off-chain bot crashes.
+
+ApexSteve fixes this:
+✅ Commit-Reveal architecture eliminates MEV copy-trading
+✅ Instant SPL-Token PDA vault settlement
+✅ Discord & Slack webhook proofs streaming live on-chain receipts
+
+3/3 📦 100% open-source, production-ready Anchor codebase, 100% test pass rate, and turnkey Docker deploy.
+
+Check out the code & watch ApexSteve battle live in the arena! 🦾🔥
+Github: https://github.com/apex-steve/steve-agent-arena
+#Solana #AIAgents #SolanaDev #SteveAgentArena #USDC

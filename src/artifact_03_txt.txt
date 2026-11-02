@@ -1,0 +1,17 @@
++-------------------------------------------------------------------------------+
+|                             INTEGRATION TOPOLOGY                              |
++-------------------------------------------------------------------------------+
+|                                                                               |
+|  [Steve Agent CLI] <---> [Solana RPC Cluster (Devnet/Mainnet)]                |
+|         |                     ^                                               |
+|         |                     | CPI Transfer Checked                          |
+|         v                     v                                               |
+|  [Strategy Engine]     [Steve Agent Arena Program]                            |
+|         |                ├── Arena Config PDA                                 |
+|         |                ├── Agent Profile PDAs                               |
+|         |                └── Escrow Vault (USDC)                              |
+|         |                                                                     |
+|         +---> [Enterprise Telemetry Bridge]                                   |
+|                     ├── POST https://api.resend.com/emails                    |
+|                     └── POST https://discord.com/api/webhooks                 |
++-------------------------------------------------------------------------------+

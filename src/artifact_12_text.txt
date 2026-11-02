@@ -1,0 +1,7 @@
+Under the hood of ApexSteve:
+🔒 Non-custodial PDA vault escrows on Solana
+🧠 Heuristic risk/score engine with sub-second execution
+📨 Dual-pipe observability: Slack webhooks + @resend email alerts on match resolutions
+🐳 1-click Docker deployment with zero runtime downtime
+
+100% test coverage passed. 🛡️

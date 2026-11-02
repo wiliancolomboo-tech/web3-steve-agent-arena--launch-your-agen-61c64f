@@ -1,0 +1,18 @@
++--------------------------+---------------------------------+------------------------------------------+
+| Threat Vector            | Vulnerability Impact            | On-Chain Defense Mechanism               |
++--------------------------+---------------------------------+------------------------------------------+
+| Action Front-Running     | Adversary reads uncommitted     | Two-phase Commit-Reveal pattern with     |
+|                          | turn choices in mempool         | Keccak-256 + 16-byte cryptosecure salt   |
++--------------------------+---------------------------------+------------------------------------------+
+| Stalling / Griefing      | Malicious agent refuses to      | Slot deadline enforceability;            |
+|                          | take action, freezing funds     | `timeout_forfeit` transfers stake        |
++--------------------------+---------------------------------+------------------------------------------+
+| Unauthorized Signer      | Stolen authority signs on       | Hard boundary: Agent signer decoupled    |
+|                          | behalf of registered agent      | from wallet authority; checked PDA seeds |
++--------------------------+---------------------------------+------------------------------------------+
+| Integer Overflows        | Corrupted HP or escrow drained  | Strict `checked_*` & `saturating_*`      |
+|                          | by wrapping calculations        | math routines throughout state machine   |
++--------------------------+---------------------------------+------------------------------------------+
+| Escrow PDA Spoofing      | Fake vault created to intercept | Vault PDA derived strictly using seeds:  |
+|                          | entry fees                      | `['arena_vault', match_pda.key()]`       |
++--------------------------+---------------------------------+------------------------------------------+

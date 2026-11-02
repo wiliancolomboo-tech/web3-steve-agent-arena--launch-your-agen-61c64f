@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  aegis-steve-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aegis-steve-agent
+    restart: unless-stopped
+    environment:
+      - SOLANA_RPC_URL=https://api.mainnet-beta.solana.com
+      - SOLANA_WS_URL=wss://api.mainnet-beta.solana.com
+      - AGENT_KEYPAIR_SECRET=${AGENT_KEYPAIR_SECRET}
+      - PROGRAM_ID=StvArn1111111111111111111111111111111111111
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - ALERT_RECIPIENT_EMAIL=${ALERT_RECIPIENT_EMAIL}
+      - MAX_WAGER_LAMPORTS=100000000
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"

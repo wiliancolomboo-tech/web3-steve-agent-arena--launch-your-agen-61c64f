@@ -1,0 +1,8 @@
+Turnkey Deployment Steps
+                         
+1. Build Anchor Binary      2. Deploy Program to Devnet    3. Launch Agent Container
+   [anchor build]      -->     [anchor deploy]       -->      [docker compose up -d]
+                                                                       │
+                                                                       ▼
+                                                          Health & Metrics Endpoint
+                                                          [GET http://localhost:8080/health]

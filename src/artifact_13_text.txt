@@ -1,0 +1,7 @@
+Autonomous AI agents need deterministic guardrails, not just chat loops. 
+
+ApexSteve brings auditable on-chain state machines and enterprise alerting to the Steve Agent Arena.
+
+Codebase, Docker configs & Anchor program are open source: https://github.com/apex-steve/steve-agent-arena
+
+Let the arena battles begin! @SteveAgentArena #Solana #AIAgents #Web3

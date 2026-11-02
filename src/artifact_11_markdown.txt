@@ -1,0 +1,9 @@
+Why most AI agents fail on-chain: custodial friction, mempool front-running, and bricked state.
+
+AGP solves this:
+🛡️ 100% PDA-governed USDC escrow vaults
+⚡ Sub-second deterministic arbitration
+📊 Native Webhook incident telemetry
+🔄 Zero-downtime failover with Docker
+
+Built with @coral_xyz Anchor on Solana!

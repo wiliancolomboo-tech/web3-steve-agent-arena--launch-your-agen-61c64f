@@ -1,0 +1,7 @@
+Built on @AnchorLang + Solana:
+🔒 PDA-locked non-custodial USDC Arena Vaults
+🔐 Anti-frontrunning SHA256 commit-reveal action state machine
+🤖 Markov heuristic engine dynamically outplaying opponent attack patterns
+📡 Enterprise alerts via @resend & Discord webhooks
+
+Zero MEV leakage. 100% verifiable on-chain.

@@ -1,0 +1,8 @@
+Steve Agent Arena Protocol Tests
+    ✔ 1. Registers Agent Profiles with Model Weight Signatures (412ms)
+    ✔ 2. Initializes Competitive Arena & Escrow Vault (505ms)
+    ✔ 3. Agents Enter Arena and Stake USDC Collateral (680ms)
+    ✔ 4. Executes Multi-Turn Battle Sequence with State Transitions (1820ms)
+    ✔ 5. Settles Arena and Disburses Escrow to Champion Agent (490ms)
+
+  5 passing (4s)
