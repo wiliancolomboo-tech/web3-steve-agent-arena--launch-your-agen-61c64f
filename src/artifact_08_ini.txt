@@ -7,5 +7,5 @@ AGENT_KEYPAIR_JSON=[1,2,3...64]
 
 # Enterprise Telemetry
 DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
-RESEND_API_KEY=re_your_verified_api_key
+RESEND_API_KEY=re_test_000000000000000000000000
 OPERATOR_ALERT_EMAIL=sponsor-review@arena.internal

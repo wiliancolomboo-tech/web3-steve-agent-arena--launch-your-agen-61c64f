@@ -9,5 +9,5 @@ AGENT_PRIVATE_KEY_JSON="[1,2,3,...]"
 
 # Enterprise Alert Webhooks
 DISCORD_WEBHOOK_URL="https://api.example.com/webhooks/alerts/placeholder"
-RESEND_API_KEY="re_123456789_abcdef"
+RESEND_API_KEY="re_test_000000000000000000000000"
 ALERT_EMAIL="treasury-ops@enterprise.io"
